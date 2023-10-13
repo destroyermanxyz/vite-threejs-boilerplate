@@ -15,10 +15,10 @@ class Experience {
 
         this.setMesh();
         this.setCamera();
-        this.setDebug();
         this.events();
         this.setRenderer();
         this.update();
+        this.setDebug();
     }
 
     setMesh() {
@@ -63,11 +63,6 @@ class Experience {
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     }
 
-    setDebug() {
-        const pane = new Pane({ title: "Parameters" });
-        // pane.addBinding()
-    }
-
     setRenderer() {
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
@@ -108,6 +103,11 @@ class Experience {
 
         this.stats.end();
         requestAnimationFrame(this.tick);
+    }
+
+    setDebug() {
+        const pane = new Pane({ title: "Parameters" });
+        // pane.addBinding()
     }
 }
 
