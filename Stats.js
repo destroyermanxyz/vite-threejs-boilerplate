@@ -38,7 +38,7 @@ var Stats = function () {
         prevTime = beginTime,
         frames = 0;
 
-    var fpsPanel = addPanel(new Stats.Panel("FPS", "#ebebeb", "#131313"));
+    var fpsPanel = addPanel(new Stats.Panel("FPS", "#ffffff", "#131313"));
     var msPanel = addPanel(new Stats.Panel("MS", "#0f0", "#020"));
 
     if (self.performance && self.performance.memory) {
@@ -103,12 +103,12 @@ Stats.Panel = function (name, fg, bg) {
         round = Math.round;
     var PR = round(window.devicePixelRatio || 1);
 
-    var width = 90;
-    var height = 53;
+    var width = 130;
+    var height = 52;
 
     var WIDTH = width * PR,
         HEIGHT = height * PR,
-        TEXT_X = 3 * PR,
+        TEXT_X = 5 * PR,
         TEXT_Y = 8 * PR,
         GRAPH_X = 0 * PR,
         GRAPH_Y = 24 * PR,
@@ -118,7 +118,7 @@ Stats.Panel = function (name, fg, bg) {
     var canvas = document.createElement("canvas");
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
-    canvas.style.cssText = "width:90px;height:53px";
+    canvas.style.cssText = "width:130px;height:53px";
 
     var context = canvas.getContext("2d");
     context.font = "bold " + 10 * PR + "px Helvetica,Arial,sans-serif";
