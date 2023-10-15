@@ -2,8 +2,8 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import vertex from "./shaders/vertex.glsl?raw";
 import fragment from "./shaders/fragment.glsl?raw";
-import { Pane } from "tweakpane";
-import Stats from "stats.js";
+import GUI from "lil-gui";
+import Stats from "./Stats";
 
 class Experience {
     constructor(canvas) {
@@ -106,8 +106,7 @@ class Experience {
     }
 
     setDebug() {
-        const pane = new Pane({ title: "Parameters" });
-        // pane.addBinding()
+        const gui = new GUI();
     }
 }
 
