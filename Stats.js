@@ -7,7 +7,7 @@ var Stats = function () {
 
     var container = document.createElement("div");
     container.style.cssText =
-        "position:fixed;top:0;left:15px;cursor:pointer;opacity:1;z-index:10000";
+        "position:fixed;top:0;right:375px;;cursor:pointer;opacity:1;z-index:10000";
     container.addEventListener(
         "click",
         function (event) {
@@ -38,7 +38,7 @@ var Stats = function () {
         prevTime = beginTime,
         frames = 0;
 
-    var fpsPanel = addPanel(new Stats.Panel("FPS", "#ffffff", "#131313"));
+    var fpsPanel = addPanel(new Stats.Panel("FPS", "#ebebeb", "#131313"));
     var msPanel = addPanel(new Stats.Panel("MS", "#0f0", "#020"));
 
     if (self.performance && self.performance.memory) {
@@ -46,8 +46,6 @@ var Stats = function () {
     }
 
     showPanel(0);
-
-    //
 
     return {
         REVISION: 16,
@@ -68,7 +66,7 @@ var Stats = function () {
 
             msPanel.update(time - beginTime, 200);
 
-            if (time > prevTime + 1000) {
+            if (time >= prevTime + 1000) {
                 fpsPanel.update((frames * 1000) / (time - prevTime), 100);
 
                 prevTime = time;
@@ -101,28 +99,28 @@ Stats.Panel = function (name, fg, bg) {
     var min = Infinity,
         max = 0,
         round = Math.round;
-    var PR = round(window.devicePixelRatio || 1);
+    var PR = Math.ceil(window.devicePixelRatio || 1);
 
-    var width = 130;
-    var height = 52;
-
-    var WIDTH = width * PR,
-        HEIGHT = height * PR,
-        TEXT_X = 5 * PR,
+    var WIDTH = 100 * PR,
+        HEIGHT = 53 * PR,
+        TEXT_X = 4 * PR,
         TEXT_Y = 8 * PR,
         GRAPH_X = 0 * PR,
-        GRAPH_Y = 24 * PR,
-        GRAPH_WIDTH = width * PR,
+        GRAPH_Y = 25 * PR,
+        GRAPH_WIDTH = 100 * PR,
         GRAPH_HEIGHT = 28 * PR;
 
     var canvas = document.createElement("canvas");
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
-    canvas.style.cssText = "width:130px;height:53px";
 
     var context = canvas.getContext("2d");
-    context.font = "bold " + 10 * PR + "px Helvetica,Arial,sans-serif";
+    context.font =
+        "600 " +
+        11 * PR +
+        "px -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Arial, sans-serif";
     context.textBaseline = "top";
+    context.setTransform(PR, 0, 0, PR, 0, 0);
 
     context.fillStyle = bg;
     context.fillRect(0, 0, WIDTH, HEIGHT);
