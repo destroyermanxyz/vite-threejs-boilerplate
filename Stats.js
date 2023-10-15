@@ -7,7 +7,7 @@ var Stats = function () {
 
     var container = document.createElement("div");
     container.style.cssText =
-        "position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000";
+        "position:fixed;top:0;left:15px;cursor:pointer;opacity:1;z-index:10000";
     container.addEventListener(
         "click",
         function (event) {
@@ -38,7 +38,7 @@ var Stats = function () {
         prevTime = beginTime,
         frames = 0;
 
-    var fpsPanel = addPanel(new Stats.Panel("FPS", "#ffffff", "#131313"));
+    var fpsPanel = addPanel(new Stats.Panel("FPS", "#ebebeb", "#131313"));
     var msPanel = addPanel(new Stats.Panel("MS", "#0f0", "#020"));
 
     if (self.performance && self.performance.memory) {
@@ -46,6 +46,8 @@ var Stats = function () {
     }
 
     showPanel(0);
+
+    //
 
     return {
         REVISION: 16,
@@ -101,22 +103,25 @@ Stats.Panel = function (name, fg, bg) {
         round = Math.round;
     var PR = round(window.devicePixelRatio || 1);
 
-    var WIDTH = 80 * PR,
-        HEIGHT = 48 * PR,
+    var width = 90;
+    var height = 53;
+
+    var WIDTH = width * PR,
+        HEIGHT = height * PR,
         TEXT_X = 3 * PR,
-        TEXT_Y = 2 * PR,
-        GRAPH_X = 3 * PR,
-        GRAPH_Y = 15 * PR,
-        GRAPH_WIDTH = 74 * PR,
-        GRAPH_HEIGHT = 30 * PR;
+        TEXT_Y = 8 * PR,
+        GRAPH_X = 0 * PR,
+        GRAPH_Y = 24 * PR,
+        GRAPH_WIDTH = width * PR,
+        GRAPH_HEIGHT = 28 * PR;
 
     var canvas = document.createElement("canvas");
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
-    canvas.style.cssText = "width:80px;height:48px";
+    canvas.style.cssText = "width:90px;height:53px";
 
     var context = canvas.getContext("2d");
-    context.font = "bold " + 9 * PR + "px Helvetica,Arial,sans-serif";
+    context.font = "bold " + 10 * PR + "px Helvetica,Arial,sans-serif";
     context.textBaseline = "top";
 
     context.fillStyle = bg;
@@ -127,7 +132,7 @@ Stats.Panel = function (name, fg, bg) {
     context.fillRect(GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT);
 
     context.fillStyle = bg;
-    context.globalAlpha = 0.9;
+    context.globalAlpha = 0.95;
     context.fillRect(GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT);
 
     return {
