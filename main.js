@@ -13,12 +13,12 @@ class Experience {
 
     this.scene = new THREE.Scene();
 
+    this.setRenderer();
     this.setMesh();
     this.setCamera();
     this.setLights();
-    this.events();
-    this.setRenderer();
-    this.update();
+    this.setEvents();
+    this.setTick();
     this.setDebug();
   }
 
@@ -57,11 +57,13 @@ class Experience {
     );
     this.camera.position.set(0, 2, 5);
 
-    this.controls = new OrbitControls(this.camera, this.canvas);
-    this.controls.enableDamping = true;
-    setTimeout(() => {
-      this.controls.dampingFactor = this.deltaTime * 5;
-    }, 500);
+    const controls = new OrbitControls(this.camera, this.canvas);
+    controls.enableDamping = true;
+
+    this.updateControls = function (deltaTime) {
+      controls.dampingFactor = deltaTime * 5;
+      controls.update();
+    };
   }
 
   setLights() {
@@ -78,7 +80,7 @@ class Experience {
     this.scene.add(this.ambient);
   }
 
-  events() {
+  setEvents() {
     this.resize = this.resize.bind(this);
     window.addEventListener("resize", this.resize);
   }
@@ -104,7 +106,7 @@ class Experience {
     this.renderer.toneMappingExposure = 1.5;
   }
 
-  update() {
+  setTick() {
     /**
      * Stats
      */
@@ -132,7 +134,7 @@ class Experience {
 
     this.mesh.rotation.y += this.deltaTime;
 
-    this.controls.update();
+    this.updateControls(this.deltaTime);
 
     this.stats.end();
     requestAnimationFrame(this.tick);
