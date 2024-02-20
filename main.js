@@ -74,7 +74,7 @@ class Experience {
         this.scene.add(this.dir);
 
         this.dirHelp = new THREE.CameraHelper(this.dir.shadow.camera, 1, "red");
-        this.scene.add(this.dirHelp);
+        // this.scene.add(this.dirHelp);
 
         this.ambient = new THREE.AmbientLight();
         this.scene.add(this.ambient);
@@ -90,7 +90,6 @@ class Experience {
         this.camera.updateProjectionMatrix();
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     }
 
     setRenderer() {
@@ -99,7 +98,6 @@ class Experience {
             antialias: true,
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderer.setClearColor("black");
         this.renderer.shadowMap.enabled = true;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -142,18 +140,6 @@ class Experience {
 
     setDebug() {
         const gui = new GUI();
-
-        const dirFolder = gui.addFolder("Directional light");
-
-        dirFolder
-            .add(this.dir.position, "x", 0, 10)
-            .onChange(() => this.dir.lookAt(0, 0, 0));
-        dirFolder
-            .add(this.dir.position, "y", 0, 10)
-            .onChange(() => this.dir.lookAt(0, 0, 0));
-        dirFolder
-            .add(this.dir.position, "z", 0, 10)
-            .onChange(() => this.dir.lookAt(0, 0, 0));
     }
 }
 
